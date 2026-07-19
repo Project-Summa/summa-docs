@@ -103,6 +103,10 @@ docs/phase-0/00_README.md
 - [ ] Phase 0 through Phase 4 are defined
 - [ ] Major platforms are identified
 - [ ] Project name is consistently written as `Summa`
+- [ ] Confirm that `summa-backend` is the shared backend for self-hosted
+      and managed deployments.
+- [ ] Keep Summa Cloud infrastructure separate from backend application code.
+- [ ] Ensure local-only mobile usage never depends on backend availability.
 
 ---
 

@@ -166,7 +166,19 @@ The server maintains a synchronized representation of data for users who enable 
 
 ---
 
-## Deployment Modes
+## Deployment Model
+
+The Summa backend is optional. Mobile applications remain fully usable
+in local-only mode without an account or server connection.
+
+The same `summa-backend` codebase powers both deployment models:
+
+1. Self-hosted deployments operated by the user.
+2. The managed Summa Cloud service operated by Project Summa.
+
+Summa Cloud must not use a separate proprietary synchronization backend.
+Differences between self-hosted and managed deployments are limited to
+infrastructure, operations, scaling and managed services.
 
 ### Local-Only Mode
 

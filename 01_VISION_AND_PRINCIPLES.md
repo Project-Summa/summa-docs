@@ -224,6 +224,12 @@ Instead, Summa aims to become the central place where users understand and organ
 
 ---
 
+## One Backend, Multiple Deployment Options
+
+Self-hosted Summa and Summa Cloud use the same open-source backend.
+The hosted service provides convenience, not exclusive functionality
+or a separate closed implementation.
+
 # Long-Term Goals
 
 Over the coming years, Summa should evolve into a complete personal finance platform with support for:

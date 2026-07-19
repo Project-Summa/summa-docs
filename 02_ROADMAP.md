@@ -452,3 +452,8 @@ However, the following principles must never change:
 - User Owns the Data
 - Cloud is Optional
 - Open Source
+
+Phase 3 — Build and release `summa-backend` for self-hosted synchronization.
+
+Phase 4 — Deploy the same backend as Summa Cloud and add managed
+infrastructure, billing, monitoring and operational tooling.

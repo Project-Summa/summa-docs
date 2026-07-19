@@ -506,6 +506,16 @@ Helper.kt
 
 ---
 
+## Repository Structure
+
+- `summa` — central documentation, architecture and governance
+- `summa-android` — native Android application
+- `summa-ios` — native iOS application
+- `summa-backend` — optional open-source synchronization backend
+- `summa-website` — official website and documentation portal
+- `.github` — organization-wide GitHub configuration
+- `summa-cloud` — private infrastructure and operations for Summa Cloud
+
 # Branch Strategy
 
 Main branches
