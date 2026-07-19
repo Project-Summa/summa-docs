@@ -1,0 +1,22 @@
+Read:
+
+- docs/phase-0/01_ARCHITECTURE.md
+- docs/phase-0/02_DATABASE.md
+- docs/phase-0/03_MOBILE_ARCHITECTURE.md
+- docs/phase-0/07_DESIGN_SYSTEM.md
+- docs/phase-0/09_CODING_GUIDELINES.md
+- docs/phase-1/03_CATEGORIES.md
+
+Implement only the category domain models and repository interfaces.
+
+Do not implement UI, Room entities or dependency injection yet.
+
+Before changing code, provide:
+
+1. implementation plan;
+2. files that will be created;
+3. assumptions;
+4. unresolved documentation conflicts;
+5. tests that will be added.
+
+docs/05_GLOSSARY_AND_DOMAIN_LANGUAGE.md
