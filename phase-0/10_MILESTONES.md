@@ -664,7 +664,7 @@ The following decisions should be resolved or explicitly deferred.
 | Final open-source license | Open | Before public repository launch |
 | Android application ID | Open | Before Android project creation |
 | Local database encryption release target | Open | Before public beta |
-| Exact profile and workspace relationship | Review | Before database implementation |
+| Exact profile and workspace relationship | Resolved | Documented in glossary and architecture |
 | Transaction split entity in MVP | Review | Before transaction schema |
 | Budget feature in MVP | Review | Before Phase 1 backlog freeze |
 | Inter versus native system font | Review | Before design implementation |

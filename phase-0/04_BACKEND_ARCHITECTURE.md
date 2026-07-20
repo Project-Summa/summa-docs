@@ -974,6 +974,8 @@ Jobs must never contain plaintext secrets or unnecessary financial details in lo
 
 Push notifications are optional.
 
+The notification infrastructure is built during Phase 3 (Synchronization) as part of the backend. However, user-facing push notifications are a Phase 4 (Summa Cloud) feature. Self-hosted deployments may configure push notifications if they provide their own FCM/APNs credentials, but this is not required for core synchronization functionality.
+
 The backend may coordinate:
 
 - Workspace invitations
@@ -1105,7 +1107,7 @@ Official documentation must include:
 - Security recommendations
 - Troubleshooting section
 
-The project should avoid requiring Kubernetes.
+The project should avoid requiring Kubernetes. Community self-managed Kubernetes deployments are not blocked, but no official Helm charts or manifests are provided.
 
 ---
 
