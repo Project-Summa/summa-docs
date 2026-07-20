@@ -205,13 +205,14 @@ Alternative Candidates
 
 Framework
 
-Decision pending.
+Chi
 
-Candidates
+Selected for its idiomatic Go design, lightweight middleware approach, excellent compatibility with `net/http` and strong community adoption.
 
-- Gin
-- Fiber
-- Chi
+Other candidates evaluated:
+
+- Gin — rejected due to heavier abstraction over `net/http`
+- Fiber — rejected due to `fasthttp` dependency limiting `net/http` ecosystem compatibility
 
 ---
 
@@ -335,7 +336,9 @@ HTTPS only.
 
 Passwords
 
-Argon2id or bcrypt.
+Argon2id (preferred).
+
+bcrypt remains acceptable where deployment constraints exist.
 
 Never store plaintext passwords.
 
@@ -501,7 +504,7 @@ Docker Compose
 
 Future
 
-Kubernetes support is not planned.
+Kubernetes is not officially supported or required. Community self-managed Kubernetes deployments are not blocked, but no official Helm charts or manifests are provided.
 
 ---
 

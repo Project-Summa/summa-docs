@@ -64,19 +64,19 @@ The workflow should:
 
 ## Repository Model
 
-Summa uses a monorepo.
+Summa uses a multi-repo strategy.
 
 ```text
-summa/
-├── android/
-├── ios/
-├── backend/
-├── docs/
-├── design/
-└── website/
+summa              — central documentation and governance
+summa-android      — native Android application
+summa-ios          — native iOS application
+summa-backend      — synchronization backend
+summa-website      — official website
+.github            — organization-wide GitHub configuration
+summa-cloud        — private cloud infrastructure
 ```
 
-All components use the same issue tracker and pull request workflow.
+All repositories share the same organization-level issue tracker and pull request workflow conventions. Cross-repo references use `org/repo#issue` notation where needed.
 
 ---
 

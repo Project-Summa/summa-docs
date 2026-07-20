@@ -19,4 +19,4 @@ Before changing code, provide:
 4. unresolved documentation conflicts;
 5. tests that will be added.
 
-docs/05_GLOSSARY_AND_DOMAIN_LANGUAGE.md
+docs/05_GLOSSARY_AND_DOMAIN_LANGUAGE.md - this should be created

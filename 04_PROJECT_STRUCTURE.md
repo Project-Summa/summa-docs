@@ -8,7 +8,7 @@
 
 - Purpose
 - Repository Strategy
-- Monorepo Structure
+- Multi-Repo Structure
 - Directory Responsibilities
 - Naming Conventions
 - Branch Strategy
@@ -32,19 +32,20 @@ Developers should never have to guess where new code belongs.
 
 # Repository Strategy
 
-Summa uses a monorepo.
+Summa uses a multi-repo strategy.
 
-All applications and services live inside the same Git repository.
+Each major component lives in its own Git repository under the Project Summa organization.
 
 Reasons:
 
-- Easier dependency management
-- Shared documentation
-- Shared branding
-- Shared issue tracking
-- Easier project navigation
-- Better CI/CD
-- Single source of truth
+- Independent release cycles per platform
+- Clear ownership boundaries
+- Smaller, focused repositories
+- Platform-specific CI/CD without cross-contamination
+- Independent contributor access control
+- Reduced clone size for single-platform contributors
+
+Shared concerns (documentation, branding, GitHub configuration) are maintained in the central `summa` repository.
 
 ---
 
@@ -506,15 +507,16 @@ Helper.kt
 
 ---
 
-## Repository Structure
+## Repository Inventory
 
-- `summa` — central documentation, architecture and governance
-- `summa-android` — native Android application
-- `summa-ios` — native iOS application
-- `summa-backend` — optional open-source synchronization backend
-- `summa-website` — official website and documentation portal
-- `.github` — organization-wide GitHub configuration
-- `summa-cloud` — private infrastructure and operations for Summa Cloud
+| Repository | Description |
+|---|---|
+| `summa` | Central documentation, architecture decisions, design system, branding guidelines and organization-wide GitHub configuration |
+| `summa-android` | Native Android application (Kotlin, Jetpack Compose, Room) |
+| `summa-ios` | Native iOS application (Swift, SwiftUI, SwiftData) |
+| `summa-backend` | Open-source synchronization backend (Go, PostgreSQL, Docker) |
+| `summa-website` | Official website and documentation portal |
+| `summa-cloud` | Private infrastructure and operational tooling for Summa Cloud |
 
 # Branch Strategy
 

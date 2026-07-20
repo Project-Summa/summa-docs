@@ -65,7 +65,7 @@ Future changes remain possible, but they must be deliberate and documented.
 | 0.3 | Data and API Contracts | Stable data model and API conventions |
 | 0.4 | Security and Privacy | Documented trust and protection model |
 | 0.5 | Design and Development Standards | Consistent UI and coding rules |
-| 0.6 | Repository Preparation | Ready monorepo and workflows |
+| 0.6 | Repository Preparation | Ready repositories and workflows |
 | 0.7 | Implementation Readiness | Approved Phase 1 starting point |
 
 ---
@@ -86,6 +86,7 @@ docs/01_VISION_AND_PRINCIPLES.md
 docs/02_ROADMAP.md
 docs/03_TECH_STACK.md
 docs/04_PROJECT_STRUCTURE.md
+docs/05_GLOSSARY_AND_DOMAIN_LANGUAGE.md
 docs/phase-0/00_README.md
 ```
 
@@ -103,10 +104,11 @@ docs/phase-0/00_README.md
 - [ ] Phase 0 through Phase 4 are defined
 - [ ] Major platforms are identified
 - [ ] Project name is consistently written as `Summa`
-- [ ] Confirm that `summa-backend` is the shared backend for self-hosted
-      and managed deployments.
-- [ ] Keep Summa Cloud infrastructure separate from backend application code.
-- [ ] Ensure local-only mobile usage never depends on backend availability.
+- [ ] Confirm that `summa-backend` is the shared backend for self-hosted and managed deployments
+- [ ] Keep Summa Cloud infrastructure separate from backend application code
+- [ ] Ensure local-only mobile usage never depends on backend availability
+- [ ] Glossary and domain language document exists and defines all key terms
+- [ ] Core domain terms (Workspace, Profile, Account) are defined consistently across all docs
 
 ---
 
@@ -202,12 +204,16 @@ The OpenAPI file may initially contain only foundational schemas and placeholder
 - [ ] Core entities are listed
 - [ ] Entity relationships are documented
 - [ ] UUID strategy is defined
-- [ ] Money uses integer minor units
-- [ ] Currency representation is defined
+- [ ] Money uses integer minor units consistently across all docs
+- [ ] Currency representation is defined (ISO 4217)
 - [ ] Date and timestamp rules are defined
 - [ ] Soft deletion strategy is defined
 - [ ] Migration policy is defined
 - [ ] Synchronization metadata is defined conceptually
+- [ ] All entities include common sync fields (id, created_at, updated_at, deleted_at, version, sync_status, device_id)
+- [ ] Workspace entity is defined as top-level organizational unit
+- [ ] Profile↔Workspace relationship is documented
+- [ ] TransactionSplit entity is defined
 - [ ] API base path is defined
 - [ ] API versioning is defined
 - [ ] JSON naming is defined
@@ -418,18 +424,17 @@ Milestone 0.5 is complete when separate contributors can produce visually and te
 
 ## Objective
 
-Create the initial monorepo structure and development automation.
+Create the initial repository structures and development automation across all repositories.
 
 ---
 
 ## Repository Structure
 
+The `summa` central repository:
+
 ```text
 summa/
 ├── .github/
-├── android/
-├── ios/
-├── backend/
 ├── docs/
 ├── design/
 ├── branding/
@@ -442,6 +447,16 @@ summa/
 ├── LICENSE
 └── CHANGELOG.md
 ```
+
+Platform repositories:
+
+```text
+summa-android/
+summa-ios/
+summa-backend/
+```
+
+Each platform repository maintains its own CI workflows, issue tracking and release cycle.
 
 ---
 
@@ -673,6 +688,7 @@ docs/
 ├── 02_ROADMAP.md
 ├── 03_TECH_STACK.md
 ├── 04_PROJECT_STRUCTURE.md
+├── 05_GLOSSARY_AND_DOMAIN_LANGUAGE.md
 └── phase-0/
     ├── 00_README.md
     ├── 01_ARCHITECTURE.md
@@ -705,8 +721,12 @@ CHANGELOG.md
 Phase 0 is complete only when:
 
 - [ ] All Phase 0 documents exist
+- [ ] Glossary and domain language document exists
 - [ ] Documents have been reviewed by the team
 - [ ] Contradictions are resolved
+- [ ] Entity definitions include all common sync fields
+- [ ] Money representation uses integer minor units consistently
+- [ ] Workspace and Profile relationship is defined
 - [ ] Critical open decisions are closed
 - [ ] Deferred decisions have assigned phases
 - [ ] Repository structure exists

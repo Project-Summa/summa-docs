@@ -145,21 +145,19 @@ UUIDs simplify synchronization between devices.
 
 # Common Fields
 
-Almost every entity contains:
+Every entity contains the following synchronization-friendly fields:
 
-id
+| Field | Type | Description |
+|-------|------|-------------|
+| id | UUID | Client-generated, globally unique. Never auto-increment. |
+| created_at | DATETIME | UTC timestamp of creation |
+| updated_at | DATETIME | UTC timestamp of last modification |
+| deleted_at | DATETIME | Nullable. Soft-delete timestamp. Null means active. |
+| version | INTEGER | Starts at 1, incremented on every modification. Used for optimistic concurrency. |
+| sync_status | TEXT | `local`, `pending`, `synced`, `conflict` |
+| device_id | UUID | Identifies the device that created or last modified the record |
 
-created_at
-
-updated_at
-
-deleted_at
-
-version
-
-sync_status
-
-These fields make future synchronization easier.
+**Note:** In Phase 1 (local-only), `version`, `sync_status`, and `device_id` are present in the schema for forward compatibility but are not actively used by any synchronization logic. They become meaningful when the Sync Engine is introduced in Phase 3.
 
 ---
 
@@ -167,7 +165,11 @@ These fields make future synchronization easier.
 
 ```
 
-Profile
+Workspace
+
+│
+
+├── Profiles
 
 │
 
@@ -176,6 +178,8 @@ Profile
 │
 
 ├── Transactions
+
+│   └── TransactionSplits
 
 │
 
@@ -187,6 +191,8 @@ Profile
 
 ```
 
+Every financial entity belongs to exactly one Workspace. A Workspace has one or more Profiles. Transactions, Categories and Budgets are scoped to a Workspace and optionally to a specific Profile within that Workspace.
+
 ---
 
 # Entity Relationship Diagram
@@ -194,40 +200,70 @@ Profile
 ```mermaid
 erDiagram
 
-PROFILE ||--o{ CATEGORY : owns
+WORKSPACE ||--o{ PROFILE : contains
+
+WORKSPACE ||--o{ CATEGORY : contains
+
+WORKSPACE ||--o{ TRANSACTION : contains
+
+WORKSPACE ||--o{ BUDGET : contains
 
 PROFILE ||--o{ TRANSACTION : owns
 
-CATEGORY ||--o{ TRANSACTION : contains
-
-PROFILE ||--o{ BUDGET : has
+CATEGORY ||--o{ TRANSACTION : classifies
 
 TRANSACTION ||--o{ ATTACHMENT : contains
+
+TRANSACTION ||--o{ TRANSACTION_SPLIT : has
+
+PROFILE ||--o{ TRANSACTION_SPLIT : participates
 ```
+
+---
+
+# Entity: Workspace
+
+Represents a shared financial space.
+
+A Workspace is the top-level organizational unit. Every financial entity belongs to exactly one Workspace. In local-only mode (Phase 1), a single Workspace is created automatically for each device. When synchronization is introduced (Phase 3), the same Workspace can be accessed across multiple devices and shared with other users.
+
+Fields
+
+| Column | Type | Description |
+|---------|------|-------------|
+| id | UUID | Client-generated |
+| name | TEXT | Display name |
+| created_at | DATETIME | UTC |
+| updated_at | DATETIME | UTC |
+| deleted_at | DATETIME | Nullable, soft delete |
+| version | INTEGER | Optimistic concurrency, starts at 1 |
+| sync_status | TEXT | `local`, `pending`, `synced`, `conflict` |
+| device_id | UUID | Origin device |
 
 ---
 
 # Entity: Profile
 
-Represents one financial identity.
+Represents one member identity within a Workspace.
 
-Examples:
-
-- Personal
-- Family
-- Roommates
-- Friends
+A Profile belongs to a single Workspace. In local-only mode, the user creates Profiles to represent themselves, their family or their household. When synchronization is enabled, each human user has one Account and may be a member of multiple Workspaces, each with their own Profile.
 
 Fields
 
-| Column | Type |
-|---------|------|
-| id | UUID |
-| name | TEXT |
-| type | TEXT |
-| currency | TEXT |
-| created_at | DATETIME |
-| updated_at | DATETIME |
+| Column | Type | Description |
+|---------|------|-------------|
+| id | UUID | Client-generated |
+| workspace_id | UUID | FK → workspace |
+| name | TEXT | Display name |
+| type | TEXT | `personal`, `household` |
+| currency | TEXT | ISO 4217 code, e.g. `USD`, `EUR`, `RSD` |
+| is_default | INTEGER | 1 if this is the default profile, 0 otherwise |
+| created_at | DATETIME | UTC |
+| updated_at | DATETIME | UTC |
+| deleted_at | DATETIME | Nullable, soft delete |
+| version | INTEGER | Optimistic concurrency, starts at 1 |
+| sync_status | TEXT | `local`, `pending`, `synced`, `conflict` |
+| device_id | UUID | Origin device |
 
 ---
 
@@ -247,14 +283,23 @@ Entertainment
 
 Fields
 
-| Column | Type |
-|---------|------|
-| id | UUID |
-| profile_id | UUID |
-| name | TEXT |
-| icon | TEXT |
-| color | TEXT |
-| type | TEXT |
+| Column | Type | Description |
+|---------|------|-------------|
+| id | UUID | Client-generated |
+| workspace_id | UUID | FK → workspace |
+| profile_id | UUID | FK → profile, nullable if category is workspace-wide |
+| name | TEXT | Display name |
+| icon | TEXT | Icon identifier |
+| color | TEXT | Hex color, e.g. `#2C3E50` |
+| type | TEXT | `expense`, `income` |
+| is_default | INTEGER | 1 if seeded system category, 0 if user-created |
+| sort_order | INTEGER | User-defined ordering |
+| created_at | DATETIME | UTC |
+| updated_at | DATETIME | UTC |
+| deleted_at | DATETIME | Nullable, soft delete |
+| version | INTEGER | Optimistic concurrency, starts at 1 |
+| sync_status | TEXT | `local`, `pending`, `synced`, `conflict` |
+| device_id | UUID | Origin device |
 
 ---
 
@@ -262,20 +307,28 @@ Fields
 
 The central entity of the application.
 
+All monetary amounts are stored as integer minor units (e.g. cents). A value of `125050` with currency `USD` represents `$1,250.50`.
+
 Fields
 
-| Column | Type |
-|---------|------|
-| id | UUID |
-| profile_id | UUID |
-| category_id | UUID |
-| amount | DECIMAL |
-| transaction_type | TEXT |
-| note | TEXT |
-| merchant | TEXT |
-| occurred_at | DATETIME |
-| created_at | DATETIME |
-| updated_at | DATETIME |
+| Column | Type | Description |
+|---------|------|-------------|
+| id | UUID | Client-generated |
+| workspace_id | UUID | FK → workspace |
+| profile_id | UUID | FK → profile |
+| category_id | UUID | FK → category, nullable |
+| amount_minor | INTEGER | Amount in minor units, always positive |
+| currency | TEXT | ISO 4217 code |
+| transaction_type | TEXT | `expense`, `income`, `transfer` |
+| note | TEXT | Nullable, user note |
+| merchant | TEXT | Nullable, merchant name |
+| occurred_at | DATETIME | UTC, when the transaction occurred |
+| created_at | DATETIME | UTC |
+| updated_at | DATETIME | UTC |
+| deleted_at | DATETIME | Nullable, soft delete |
+| version | INTEGER | Optimistic concurrency, starts at 1 |
+| sync_status | TEXT | `local`, `pending`, `synced`, `conflict` |
+| device_id | UUID | Origin device |
 
 ---
 
@@ -297,13 +350,22 @@ Represents spending limits.
 
 Fields
 
-| Column | Type |
-|---------|------|
-| id | UUID |
-| profile_id | UUID |
-| category_id | UUID |
-| amount | DECIMAL |
-| period | TEXT |
+| Column | Type | Description |
+|---------|------|-------------|
+| id | UUID | Client-generated |
+| workspace_id | UUID | FK → workspace |
+| profile_id | UUID | FK → profile |
+| category_id | UUID | FK → category, nullable for overall budget |
+| amount_minor | INTEGER | Budget limit in minor units |
+| currency | TEXT | ISO 4217 code |
+| period | TEXT | `weekly`, `monthly`, `yearly` |
+| start_date | DATE | Budget period start |
+| created_at | DATETIME | UTC |
+| updated_at | DATETIME | UTC |
+| deleted_at | DATETIME | Nullable, soft delete |
+| version | INTEGER | Optimistic concurrency, starts at 1 |
+| sync_status | TEXT | `local`, `pending`, `synced`, `conflict` |
+| device_id | UUID | Origin device |
 
 ---
 
@@ -319,13 +381,21 @@ Examples
 
 Fields
 
-| Column | Type |
-|---------|------|
-| id | UUID |
-| transaction_id | UUID |
-| file_name | TEXT |
-| mime_type | TEXT |
-| local_path | TEXT |
+| Column | Type | Description |
+|---------|------|-------------|
+| id | UUID | Client-generated |
+| workspace_id | UUID | FK → workspace |
+| transaction_id | UUID | FK → transaction |
+| file_name | TEXT | Original file name |
+| mime_type | TEXT | e.g. `image/jpeg`, `application/pdf` |
+| local_path | TEXT | Local file path |
+| file_size | INTEGER | Size in bytes |
+| created_at | DATETIME | UTC |
+| updated_at | DATETIME | UTC |
+| deleted_at | DATETIME | Nullable, soft delete |
+| version | INTEGER | Optimistic concurrency, starts at 1 |
+| sync_status | TEXT | `local`, `pending`, `synced`, `conflict` |
+| device_id | UUID | Origin device |
 
 ---
 
@@ -420,33 +490,57 @@ Encrypted backup archive.
 
 ---
 
+# Entity: TransactionSplit
+
+Represents one participant's share of a shared expense.
+
+When a Transaction is split among multiple Profiles, each split record stores the portion allocated to one participant. The sum of all splits for a transaction must equal the transaction amount in minor units. If the amount cannot be divided evenly, the remainder is assigned to the first participant in a deterministic order.
+
+Fields
+
+| Column | Type | Description |
+|---------|------|-------------|
+| id | UUID | Client-generated |
+| workspace_id | UUID | FK → workspace |
+| transaction_id | UUID | FK → transaction |
+| profile_id | UUID | FK → profile (the participant) |
+| amount_minor | INTEGER | This participant's share in minor units |
+| is_settled | INTEGER | 1 if settled, 0 if outstanding |
+| settled_at | DATETIME | Nullable, UTC |
+| created_at | DATETIME | UTC |
+| updated_at | DATETIME | UTC |
+| deleted_at | DATETIME | Nullable, soft delete |
+| version | INTEGER | Optimistic concurrency, starts at 1 |
+| sync_status | TEXT | `local`, `pending`, `synced`, `conflict` |
+| device_id | UUID | Origin device |
+
+---
+
 # Future Entities
 
-Planned entities include:
+Planned entities for later phases. These are intentionally excluded from Phase 1.
 
-RecurringTransaction
+## Phase 2 Entities
 
-Reminder
+- RecurringTransaction — scheduled repeating transactions
+- Reminder — bill and subscription reminders
+- BankStatement — imported bank statement metadata
+- OCRDocument — OCR scan results
 
-Subscription
+## Phase 3 Entities
 
-BankStatement
+- User — server-side user account (email, password hash)
+- Device — registered device for push and sync identification
+- Invitation — workspace invitation for shared access
+- Notification — push notification records
+- SyncEvent — sync operation audit log
+- AuditLog — security-relevant action log
 
-OCRDocument
+## Phase 4 Entities
 
-Notification
+- Subscription — managed cloud subscription state
 
-Workspace
-
-User
-
-Invitation
-
-AuditLog
-
-SyncEvent
-
-These entities are intentionally excluded from Phase 1.
+These entities should be defined in detail during their respective phase planning.
 
 ---
 

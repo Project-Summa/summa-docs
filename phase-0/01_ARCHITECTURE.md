@@ -177,6 +177,58 @@ Database logic should never appear inside screens.
 
 ---
 
+# Data Ownership Model
+
+## Local-Only Mode (Phase 1)
+
+In local-only mode, the application creates a single **Workspace** automatically on first launch. The user creates one or more **Profiles** within that Workspace to represent themselves, their family or their household.
+
+The user does not interact with the Workspace concept directly. All user-visible organizational boundaries are expressed through Profiles.
+
+```
+Device
+  └── Workspace (auto-created, invisible to user)
+        ├── Profile: Personal
+        ├── Profile: Family
+        └── Profile: Household
+```
+
+---
+
+## Synchronization Mode (Phase 3+)
+
+When synchronization is enabled, the existing local Workspace is registered with the server. It becomes a shared Workspace that can be accessed from multiple devices.
+
+Each human user has one **Account** (identified by email). An Account can be a member of multiple Workspaces. Within each Workspace, the Account has a **Profile**.
+
+```
+Account: user@example.com
+  ├── Workspace: Personal Finances
+  │     └── Profile: Me
+  ├── Workspace: Family Budget
+  │     ├── Profile: Me
+  │     └── Profile: Partner
+  └── Workspace: Roommates
+        ├── Profile: Me
+        └── Profile: Roommate A
+```
+
+---
+
+## Migration Path
+
+When a user upgrades from local-only to sync-enabled:
+
+1. The existing local Workspace is preserved unchanged.
+2. A server-side Workspace is created to mirror the local one.
+3. All existing data is pushed to the server as the initial sync.
+4. No local data is lost or restructured.
+5. Profiles remain as-is; they gain server-side Account associations.
+
+This migration is non-destructive and reversible through local backup.
+
+---
+
 # System Components
 
 The project consists of several independent components.
