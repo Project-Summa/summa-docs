@@ -2,7 +2,7 @@
 
 Summa uses a centralized contribution guide that applies to all repositories in the Project-Summa organization.
 
-Please see the [Contributing Guide](https://github.com/Project-Summa/.github/blob/main/CONTRIBUTING.md) for:
+Please see the [Contributing Guide](https://github.com/Project-Summa/.github/blob/master/CONTRIBUTING.md) for:
 
 - How to report bugs
 - How to suggest features

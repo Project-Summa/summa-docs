@@ -97,9 +97,9 @@ summa/
 
 ## Getting Involved
 
-- Read the [Contributing Guide](https://github.com/Project-Summa/.github/blob/main/CONTRIBUTING.md)
-- Review the [Security Policy](https://github.com/Project-Summa/.github/blob/main/SECURITY.md)
-- Check the [Code of Conduct](https://github.com/Project-Summa/.github/blob/main/CODE_OF_CONDUCT.md)
+- Read the [Contributing Guide](https://github.com/Project-Summa/.github/blob/master/CONTRIBUTING.md)
+- Review the [Security Policy](https://github.com/Project-Summa/.github/blob/master/SECURITY.md)
+- Check the [Code of Conduct](https://github.com/Project-Summa/.github/blob/master/CODE_OF_CONDUCT.md)
 
 ---
 
