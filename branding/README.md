@@ -20,4 +20,4 @@ branding/
 - `colors/` — Source brand color definitions
 - `typography/` — Licensed font files used by the brand
 
-See [Design System Documentation](../phase-0/07_DESIGN_SYSTEM.md) for how brand tokens are implemented in code.
+See [Design System Documentation](../docs/phase-0/07_DESIGN_SYSTEM.md) for how brand tokens are implemented in code.

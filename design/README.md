@@ -17,4 +17,4 @@ design/
 
 The primary design tool is Figma. Files in this directory serve as reference documentation and exported assets.
 
-See [Design System Documentation](../phase-0/07_DESIGN_SYSTEM.md) for the full design specification.
+See [Design System Documentation](../docs/phase-0/07_DESIGN_SYSTEM.md) for the full design specification.
