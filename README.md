@@ -1,12 +1,29 @@
+<div align="center">
+
 # Summa
 
-> A privacy-first, open-source personal finance platform. Own your data. Track your money. Your way.
+**A privacy-first, open-source personal finance platform.**
+
+*Own your data. Track your money. Your way.*
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-Phase%200%20—%20Foundation-orange)](#current-status)
+
+</div>
 
 ---
 
-## What is Summa?
+<p align="center">
+  <em>Summa is a local-first personal finance application built for people who believe their financial data belongs to them — not to clouds, corporations, or subscriptions.</em>
+</p>
 
-Summa is a local-first personal finance application that works entirely on your device. No cloud required. No data harvesting. No subscriptions needed to access your own financial history.
+<p align="center">
+  <strong>Offline by default. Open forever. Private by design.</strong>
+</p>
+
+<p align="center">
+  No accounts required. No data harvesting. No subscriptions needed to access your own financial history.
+</p>
 
 ---
 
