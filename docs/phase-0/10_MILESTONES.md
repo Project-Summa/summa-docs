@@ -671,6 +671,7 @@ The following decisions should be resolved or explicitly deferred.
 | Backend Go framework | Deferred | Before Phase 3 |
 | PostgreSQL migration tool | Deferred | Before Phase 3 |
 | Self-hosted email requirement | Deferred | Before Phase 3 |
+| Domain and hosting setup | Open | Before Phase 1 (website) |
 | Cloud billing provider | Deferred | Before Phase 4 |
 
 Deferred decisions must have a defined phase in which they become blocking.
