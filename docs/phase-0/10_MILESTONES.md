@@ -661,7 +661,7 @@ The following decisions should be resolved or explicitly deferred.
 
 | Decision | Status | Deadline |
 |---|---|---|
-| Final open-source license | Open | Before public repository launch |
+| Final open-source license | Resolved — AGPL-3.0 | — |
 | Android application ID | Open | Before Android project creation |
 | Local database encryption release target | Open | Before public beta |
 | Exact profile and workspace relationship | Resolved | Documented in glossary and architecture |
