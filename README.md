@@ -6,7 +6,7 @@
 
 *Own your data. Track your money. Your way.*
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-Phase%200%20—%20Foundation-orange)](#current-status)
 
 </div>
