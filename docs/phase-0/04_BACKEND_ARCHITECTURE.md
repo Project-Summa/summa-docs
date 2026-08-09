@@ -171,7 +171,7 @@ The server maintains a synchronized representation of data for users who enable 
 The Summa backend is optional. Mobile applications remain fully usable
 in local-only mode without an account or server connection.
 
-The same `summa-backend` codebase powers both deployment models:
+The same [`summa`](https://github.com/Project-Summa/summa) codebase powers both deployment models:
 
 1. Self-hosted deployments operated by the user.
 2. The managed Summa Cloud service operated by Project Summa.

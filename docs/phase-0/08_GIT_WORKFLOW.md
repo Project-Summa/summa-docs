@@ -67,10 +67,10 @@ The workflow should:
 Summa uses a multi-repo strategy.
 
 ```text
-summa              — central documentation and governance
+summa-docs         — central documentation and governance
 summa-android      — native Android application
 summa-ios          — native iOS application
-summa-backend      — synchronization backend
+summa              — synchronization backend
 summa-website      — official website
 .github            — organization-wide GitHub configuration
 summa-cloud        — private cloud infrastructure

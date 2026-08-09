@@ -47,10 +47,11 @@ Summa is in **Phase 0 — Foundation**. The team is establishing architecture, d
 
 | Repository | Description |
 |---|---|
-| [`summa`](https://github.com/Project-Summa/summa) | Central documentation, design files and project coordination |
-| [`summa-android`](https://github.com/Project-Summa/summa-android) | Android application |
-| [`summa-ios`](https://github.com/Project-Summa/summa-ios) | iOS application |
-| [`summa-backend`](https://github.com/Project-Summa/summa-backend) | Optional self-hosted synchronization server |
+| [`summa-docs`](https://github.com/Project-Summa/summa-docs) | Documentation, architecture and project governance |
+| [`summa-android`](https://github.com/Project-Summa/summa-android) | Native Android client |
+| [`summa-ios`](https://github.com/Project-Summa/summa-ios) | Native iOS client |
+| [`summa`](https://github.com/Project-Summa/summa) | Open-source synchronization backend |
+| [`summa-website`](https://github.com/Project-Summa/summa-website) | Official website and documentation portal |
 
 ---
 

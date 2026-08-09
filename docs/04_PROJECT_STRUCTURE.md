@@ -511,10 +511,10 @@ Helper.kt
 
 | Repository | Description |
 |---|---|
-| `summa` | Central documentation, architecture decisions, design system, branding guidelines and organization-wide GitHub configuration |
+| `summa-docs` | Documentation, architecture decisions, design system, branding guidelines and project governance |
 | `summa-android` | Native Android application (Kotlin, Jetpack Compose, Room) |
 | `summa-ios` | Native iOS application (Swift, SwiftUI, SwiftData) |
-| `summa-backend` | Open-source synchronization backend (Go, PostgreSQL, Docker) |
+| `summa` | Open-source synchronization backend (Go, PostgreSQL, Docker) |
 | `summa-website` | Official website and documentation portal |
 | `summa-cloud` | Private infrastructure and operational tooling for Summa Cloud |
 

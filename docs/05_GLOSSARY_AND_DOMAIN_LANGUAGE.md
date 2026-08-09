@@ -278,7 +278,7 @@ The default deployment mode in Phase 1. All data is stored on the device. No ser
 
 ### Self-Hosted Mode
 
-A deployment mode (Phase 3) where the user runs `summa-backend` on their own infrastructure. The user controls their data and server configuration.
+A deployment mode (Phase 3) where the user runs the [backend](https://github.com/Project-Summa/summa) (`summa`) on their own infrastructure. The user controls their data and server configuration.
 
 ---
 
@@ -310,7 +310,7 @@ Adds smart features to the local application: OCR receipt scanning, bank stateme
 
 ### Phase 3 — Synchronization
 
-Introduces the open-source backend (`summa-backend`), user accounts, device registration, real-time synchronization, shared workspaces, push notifications and self-hosting support.
+Introduces the open-source backend ([`summa`](https://github.com/Project-Summa/summa)), user accounts, device registration, real-time synchronization, shared workspaces, push notifications and self-hosting support.
 
 ---
 

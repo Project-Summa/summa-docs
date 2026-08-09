@@ -453,7 +453,7 @@ However, the following principles must never change:
 - Cloud is Optional
 - Open Source
 
-Phase 3 — Build and release `summa-backend` for self-hosted synchronization.
+Phase 3 — Build and release the [backend](https://github.com/Project-Summa/summa) for self-hosted synchronization.
 
-Phase 4 — Deploy the same backend as Summa Cloud and add managed
+Phase 4 — Deploy the same backend as [Summa Cloud](https://github.com/Project-Summa/summa-cloud) and add managed
 infrastructure, billing, monitoring and operational tooling.

@@ -104,7 +104,7 @@ docs/phase-0/00_README.md
 - [ ] Phase 0 through Phase 4 are defined
 - [ ] Major platforms are identified
 - [ ] Project name is consistently written as `Summa`
-- [ ] Confirm that `summa-backend` is the shared backend for self-hosted and managed deployments
+- [ ] Confirm that `summa` is the shared backend for self-hosted and managed deployments
 - [ ] Keep Summa Cloud infrastructure separate from backend application code
 - [ ] Ensure local-only mobile usage never depends on backend availability
 - [ ] Glossary and domain language document exists and defines all key terms
@@ -453,7 +453,7 @@ Platform repositories:
 ```text
 summa-android/
 summa-ios/
-summa-backend/
+summa/ (backend)
 ```
 
 Each platform repository maintains its own CI workflows, issue tracking and release cycle.
