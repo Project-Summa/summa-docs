@@ -54,7 +54,7 @@ During Phase 1 the architecture is intentionally simple.
 ```
 
 +-----------------------+
-|      Android App      |
+|   Mobile App (Flutter)|
 +-----------------------+
             │
             ▼
@@ -70,7 +70,7 @@ During Phase 1 the architecture is intentionally simple.
             ▼
 +-----------------------+
 |     Local Storage     |
-|      Room / SQLite    |
+|    drift / SQLite     |
 +-----------------------+
 
 ```
@@ -87,7 +87,7 @@ During later phases, synchronization is introduced.
 
 ```
 
-              Android
+            Mobile (Flutter)
 
                   │
 
@@ -235,11 +235,7 @@ The project consists of several independent components.
 
 ```
 
-Android App
-
-↓
-
-iOS App
+Mobile App (Flutter)
 
 ↓
 
@@ -263,7 +259,7 @@ Each component has a clear responsibility.
 
 ---
 
-# Android Application
+# Mobile Application
 
 Responsibilities:
 
@@ -274,15 +270,9 @@ Responsibilities:
 - Biometrics
 - Offline mode
 
-The Android application should remain fully functional independently.
+The mobile application is built with Flutter and targets both Android and iOS from a single codebase.
 
----
-
-# iOS Application
-
-Responsibilities mirror Android.
-
-Both applications should expose the same functionality while following platform-specific guidelines.
+It should remain fully functional independently.
 
 ---
 
@@ -430,7 +420,7 @@ Infrastructure
 
 Contains:
 
-- Compose Screens
+- Flutter Widgets
 - ViewModels
 - Navigation
 - UI State
@@ -449,9 +439,9 @@ Contains:
 - Use Cases
 - Repository Interfaces
 
-Pure Kotlin.
+Pure Dart.
 
-No Android dependencies.
+No Flutter framework dependencies.
 
 ---
 
@@ -460,7 +450,7 @@ No Android dependencies.
 Contains:
 
 - Repository Implementations
-- Room
+- drift DAOs
 - Data Sources
 - Mappers
 
@@ -571,7 +561,7 @@ ViewModel
 
 ↓
 
-Room DAO
+drift DAO
 
 ```
 
@@ -677,9 +667,10 @@ Every significant architectural decision should be documented as an ADR.
 
 Examples include:
 
+- Why Flutter?
 - Why MVVM?
 - Why Repository Pattern?
-- Why Room?
+- Why drift?
 - Why SQLite?
 - Why Go?
 - Why REST?

@@ -1,6 +1,6 @@
 # Mobile Architecture
 
-> Defining the architecture, structure and development guidelines for the Summa mobile applications.
+> Defining the architecture, structure and development guidelines for the Summa mobile application.
 
 ---
 
@@ -27,7 +27,7 @@
 
 # Purpose
 
-This document defines the architecture used by the mobile applications.
+This document defines the architecture used by the mobile application.
 
 The architecture should remain:
 
@@ -37,7 +37,7 @@ The architecture should remain:
 - Easy to understand
 - Easy to maintain
 
-The Android and iOS applications should follow similar architectural concepts while respecting each platform's native conventions.
+The Flutter application follows a single codebase approach, sharing logic and UI across Android and iOS while respecting platform conventions where appropriate.
 
 ---
 
@@ -61,11 +61,11 @@ The architecture should provide:
 
 Language
 
-Kotlin
+Dart
 
 UI
 
-Jetpack Compose
+Flutter Widgets
 
 Architecture
 
@@ -81,11 +81,11 @@ Android 8 (API 26)
 
 Language
 
-Swift
+Dart
 
 UI
 
-SwiftUI
+Flutter Widgets
 
 Architecture
 
@@ -93,7 +93,7 @@ MVVM
 
 Minimum Version
 
-iOS 17
+iOS 16
 
 ---
 
@@ -105,11 +105,11 @@ User
 
 ↓
 
-Compose Screen
+Flutter Widget (Screen)
 
 ↓
 
-ViewModel
+ViewModel / StateNotifier
 
 ↓
 
@@ -129,11 +129,11 @@ Repository
 
 ↓
 
-ViewModel
+ViewModel / StateNotifier
 
 ↓
 
-Compose Screen
+Flutter Widget (Screen)
 
 ```
 
@@ -149,8 +149,8 @@ Features are isolated.
 
 Each feature owns:
 
-- UI
-- ViewModel
+- UI (widgets)
+- ViewModel / State Notifier
 - Navigation
 - State
 - Events
@@ -193,11 +193,11 @@ Only one source owns application data.
 
 During Phase 1:
 
-Room Database
+drift Database
 
 Future:
 
-Room + Sync Engine
+drift + Sync Engine
 
 ---
 
@@ -208,6 +208,8 @@ UI State should always be immutable.
 State changes create a new state object.
 
 Never mutate existing state.
+
+Use freezed for immutable state classes.
 
 ---
 
@@ -237,13 +239,13 @@ Infrastructure
 
 Contains:
 
-- Compose Screens
-- ViewModels
+- Flutter Widgets (Screens)
+- ViewModels / State Notifiers
 - Navigation
 - UI State
 - Events
 
-Presentation never accesses Room directly.
+Presentation never accesses the database directly.
 
 ---
 
@@ -255,9 +257,9 @@ Contains:
 - Use Cases
 - Repository Interfaces
 
-Pure Kotlin.
+Pure Dart.
 
-No Android dependencies.
+No Flutter framework dependencies.
 
 ---
 
@@ -266,7 +268,7 @@ No Android dependencies.
 Contains:
 
 - Repository implementations
-- Room DAO
+- drift DAOs
 - Local Data Source
 - Future Remote Data Source
 
@@ -278,9 +280,9 @@ Responsible for retrieving and saving data.
 
 Contains:
 
-- SQLite
-- Room
-- DataStore
+- SQLite (via drift)
+- flutter_secure_storage
+- shared_preferences
 - Networking
 - Encryption
 - Notifications
@@ -305,23 +307,23 @@ components/
 
 screens/
 
-TransactionScreen.kt
+transaction_screen.dart
 
 viewmodel/
 
-TransactionViewModel.kt
+transaction_view_model.dart
 
 state/
 
-TransactionState.kt
+transaction_state.dart
 
 events/
 
-TransactionEvent.kt
+transaction_event.dart
 
 navigation/
 
-TransactionNavigation.kt
+transaction_navigation.dart
 
 domain/
 
@@ -339,7 +341,7 @@ Each feature should remain independent.
 
 # UI Architecture
 
-Compose UI should remain stateless whenever possible.
+Flutter widgets should remain stateless whenever possible.
 
 Preferred structure:
 
@@ -424,7 +426,7 @@ Repositories hide implementation details.
 
 Presentation never knows whether data comes from:
 
-- Room
+- drift
 - REST API
 - Cache
 - Sync Engine
@@ -460,6 +462,8 @@ UiState should contain:
 - Empty
 - Error
 
+State management uses Riverpod (preferred) or BLoC.
+
 ---
 
 # Events
@@ -494,7 +498,7 @@ Events are received only by ViewModels.
 
 Framework
 
-Hilt
+Riverpod
 
 Injection should be constructor-based whenever possible.
 
@@ -504,7 +508,7 @@ Avoid Service Locator patterns.
 
 # Navigation
 
-Navigation uses Navigation Compose.
+Navigation uses GoRouter.
 
 Each feature owns its destination.
 
@@ -566,15 +570,17 @@ Loss of connectivity should never interrupt normal usage.
 
 Guidelines:
 
-Avoid unnecessary recomposition.
+Avoid unnecessary rebuilds.
 
-Prefer LazyColumn.
+Prefer ListView.builder for long lists.
 
-Avoid blocking the Main Thread.
+Avoid blocking the main isolate.
+
+Use const widgets where possible.
+
+Move heavy work to compute() or background isolates.
 
 Use immutable collections.
-
-Move heavy work to Dispatchers.IO.
 
 ---
 
@@ -583,7 +589,7 @@ Move heavy work to Dispatchers.IO.
 Every screen should support:
 
 - Dynamic font sizes
-- Screen readers
+- Screen readers (Semantics)
 - Sufficient contrast
 - Large touch targets
 
@@ -645,7 +651,7 @@ Every layer should be testable.
 
 Presentation
 
-UI Tests
+Widget Tests
 
 Domain
 

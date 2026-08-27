@@ -74,7 +74,7 @@ The primary goals of Summa are:
 
 - Local-first architecture
 - Offline functionality
-- Beautiful native mobile applications
+- Beautiful cross-platform mobile application (Flutter)
 - Cross-device synchronization
 - Open-source transparency
 - Self-hosted infrastructure

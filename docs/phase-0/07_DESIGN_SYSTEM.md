@@ -43,8 +43,7 @@ This document defines the Summa design system.
 
 The design system acts as the shared visual and interaction language for:
 
-- Android
-- iOS
+- Mobile (Flutter — Android and iOS)
 - Future desktop applications
 - Future web interfaces
 - Documentation
@@ -132,8 +131,7 @@ Summa uses:
 
 - Shared Figma design tokens
 - Shared component specifications
-- Native Android implementation using Jetpack Compose
-- Native iOS implementation using SwiftUI
+- Flutter implementation using Material 3 widgets
 
 The applications should remain visually aligned while allowing platform-specific differences.
 
@@ -157,9 +155,8 @@ Recommended Figma pages:
 02 Tokens
 03 Components
 04 Patterns
-05 Android
-06 iOS
-07 Prototypes
+05 Mobile
+06 Prototypes
 08 Archive
 ```
 
@@ -1109,32 +1106,20 @@ The design must not assume a fixed currency symbol position.
 
 ## Implementation Mapping
 
-### Android
+### Flutter
 
 Figma tokens map to:
 
 ```text
-MaterialTheme
+ThemeData
 ColorScheme
-Typography
-Shapes
-CompositionLocal values
-Reusable Compose components
+TextTheme
+ShapeTheme
+Reusable Flutter widgets
+Riverpod providers for theme access
 ```
 
-### iOS
-
-Figma tokens map to:
-
-```text
-SwiftUI Color assets
-Font styles
-View modifiers
-Reusable SwiftUI views
-Environment values
-```
-
-Token names should remain conceptually aligned across platforms.
+Token names should remain consistent across the codebase.
 
 ---
 

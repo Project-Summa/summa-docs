@@ -371,7 +371,7 @@ Recommended protection strategy:
 
 Encryption should use an authenticated encryption mechanism.
 
-The exact database encryption implementation must be validated separately for Android and iOS.
+The exact database encryption implementation must be validated for the Flutter platform layer.
 
 ---
 
@@ -392,7 +392,7 @@ Target:
 
 - Encrypted local database
 - Securely generated database key
-- Key protection through Android Keystore or iOS Keychain
+- Key protection through flutter_secure_storage (Android Keystore / iOS Keychain)
 - Recovery strategy documented
 
 Database encryption must not be introduced without a reliable backup and recovery plan.
@@ -422,19 +422,16 @@ The application lock should protect:
 
 ## Biometric Authentication
 
-Biometric authentication should use platform APIs.
-
-Android:
+Biometric authentication should use:
 
 ```text
-BiometricPrompt
+local_auth (Flutter plugin)
 ```
 
-iOS:
+This plugin uses platform-native biometric APIs under the hood:
 
-```text
-LocalAuthentication
-```
+- Android: BiometricPrompt
+- iOS: LocalAuthentication
 
 Summa must never receive or store raw biometric data.
 
@@ -475,13 +472,16 @@ The application should at minimum obscure sensitive views in the recent-app swit
 
 ## Secure Key Storage
 
-### Android
-
 Secrets should be protected using:
 
 ```text
-Android Keystore
+flutter_secure_storage
 ```
+
+This library uses platform-native secure storage under the hood:
+
+- Android: Android Keystore
+- iOS: iOS Keychain
 
 Possible stored secrets:
 
@@ -490,16 +490,6 @@ Possible stored secrets:
 - Refresh token
 - Backup encryption key reference
 - Device private key in future versions
-
----
-
-### iOS
-
-Secrets should be protected using:
-
-```text
-iOS Keychain
-```
 
 Appropriate accessibility classes should be selected based on whether synchronization must work while the device is locked.
 

@@ -324,8 +324,7 @@ PostgreSQL
 
 ### Synchronization
 
-- Android
-- iOS
+- Mobile (Flutter — Android and iOS)
 - Desktop (future)
 
 ---

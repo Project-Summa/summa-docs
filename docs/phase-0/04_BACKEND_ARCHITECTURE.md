@@ -138,11 +138,9 @@ The backend architecture should be:
 
 ```mermaid
 flowchart TD
-    A[Android Application] --> B[Local SQLite Database]
-    C[iOS Application] --> D[Local SQLite or SwiftData Database]
+    A[Mobile Application] --> B[Local SQLite Database]
 
     B --> E[Mobile Sync Engine]
-    D --> F[Mobile Sync Engine]
 
     E --> G[Summa REST API]
     F --> G
@@ -631,7 +629,7 @@ Device fields may include:
 | `id` | Stable device identifier |
 | `user_id` | Device owner |
 | `name` | User-readable device name |
-| `platform` | Android, iOS or future platform |
+| `platform` | Mobile (Android/iOS) or future platform |
 | `app_version` | Installed application version |
 | `last_seen_at` | Last successful connection |
 | `created_at` | Registration time |
