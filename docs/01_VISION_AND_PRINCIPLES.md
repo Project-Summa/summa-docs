@@ -182,17 +182,15 @@ Examples include:
 
 ---
 
-## 6. Platform-Appropriate Experience
+## 6. Native Experience
 
-The application should feel natural on every platform.
-
-Flutter provides a single codebase while respecting platform conventions.
+Every supported platform should feel native.
 
 Android should behave like an Android application.
 
 iOS should behave like an iOS application.
 
-Platform conventions should be respected where appropriate.
+Platform conventions should be respected.
 
 ---
 
@@ -236,7 +234,8 @@ or a separate closed implementation.
 
 Over the coming years, Summa should evolve into a complete personal finance platform with support for:
 
-- Cross-platform mobile application (Flutter)
+- Native Android application
+- Native iOS application
 - Desktop applications
 - Self-hosted synchronization
 - Official cloud synchronization

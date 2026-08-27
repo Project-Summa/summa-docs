@@ -75,7 +75,7 @@ SQLite
 
 ↓
 
-drift
+Room
 
 Future
 
@@ -464,7 +464,7 @@ Indexes should only be added where performance benefits justify additional stora
 
 # Migration Strategy
 
-drift migrations should always be used.
+Room migrations should always be used.
 
 Database version increases whenever:
 

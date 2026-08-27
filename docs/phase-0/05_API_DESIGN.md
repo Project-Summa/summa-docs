@@ -58,7 +58,8 @@ The same API should be used by:
 
 - Self-hosted Summa installations
 - Summa Cloud
-- Mobile application (Flutter — Android and iOS)
+- Android application
+- iOS application
 - Future desktop applications
 - Future web applications
 - Future command-line or integration clients
@@ -312,7 +313,7 @@ Reasons:
 
 - Consistency with database naming
 - Clear API readability
-- Straightforward mapping in Dart and Go
+- Straightforward mapping in Kotlin, Swift and Go
 - Predictable generated API documentation
 
 ---
@@ -1992,7 +1993,8 @@ The implementation and specification must remain synchronized.
 
 The OpenAPI specification may later be used to generate:
 
-- Dart API models
+- Kotlin API models
+- Swift API models
 - TypeScript clients
 - Documentation website
 - Contract tests

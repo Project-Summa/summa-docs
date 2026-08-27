@@ -57,7 +57,9 @@ summa/
 
 ├── .github/
 │
-├── mobile/
+├── android/
+│
+├── ios/
 │
 ├── backend/
 │
@@ -92,22 +94,43 @@ Contains:
 
 ---
 
-## mobile/
+## android/
 
-Cross-platform mobile application built with Flutter.
+Native Android application.
 
 Technology:
 
-- Dart
-- Flutter
-- drift
+- Kotlin
+- Jetpack Compose
+- Room
 
 Contains:
 
-- lib/ (application source code)
-- test/ (unit and widget tests)
-- integration_test/ (integration tests)
-- assets/ (fonts, images, animations)
+- UI
+- ViewModels
+- Domain
+- Data Layer
+- Resources
+- Tests
+
+---
+
+## ios/
+
+Native iOS application.
+
+Technology:
+
+- Swift
+- SwiftUI
+
+Contains:
+
+- Views
+- Models
+- Persistence
+- Resources
+- Tests
 
 ---
 
@@ -186,15 +209,23 @@ Documentation website (future).
 
 ---
 
-# Mobile Structure
+# Android Structure
 
 ```
 
-mobile/
-
-lib/
+android/
 
 app/
+
+src/
+
+main/
+
+kotlin/
+
+com/
+
+summa/
 
 core/
 
@@ -208,13 +239,13 @@ navigation/
 
 ui/
 
-main.dart
+MainActivity.kt
 
 ```
 
 ---
 
-# Mobile Modules
+# Android Modules
 
 ## core
 
@@ -235,8 +266,8 @@ Responsible for data access.
 
 Contains:
 
-- drift database
-- DAOs
+- Room
+- DAO
 - Repository implementations
 - Local storage
 - Future networking
@@ -253,9 +284,7 @@ Contains:
 - Use Cases
 - Repository interfaces
 
-Pure Dart.
-
-No Flutter framework dependencies.
+The domain layer must not depend on Android.
 
 ---
 
@@ -285,8 +314,8 @@ scanner/
 
 Each feature contains:
 
-- UI (widgets)
-- ViewModel / State Notifier
+- UI
+- ViewModel
 - State
 - Events
 
@@ -294,9 +323,9 @@ Each feature contains:
 
 ## navigation
 
-Navigation configuration.
+Navigation graph.
 
-Route definitions.
+Destination definitions.
 
 Deep links.
 
@@ -450,17 +479,17 @@ MAX_PROFILES
 
 Files
 
-Use descriptive names in snake_case (Dart convention).
+Use descriptive names.
 
 Good
 
 ```
 
-dashboard_screen.dart
+DashboardScreen.kt
 
-transaction_repository.dart
+TransactionRepository.kt
 
-statistics_view_model.dart
+StatisticsViewModel.kt
 
 ```
 
@@ -468,11 +497,11 @@ Avoid
 
 ```
 
-screen.dart
+Screen.kt
 
-utils.dart
+Utils.kt
 
-helper.dart
+Helper.kt
 
 ```
 
@@ -483,7 +512,8 @@ helper.dart
 | Repository | Description |
 |---|---|
 | `summa-docs` | Documentation, architecture decisions, design system, branding guidelines and project governance |
-| `summa-mobile` | Cross-platform mobile application (Flutter, Dart, drift) |
+| `summa-android` | Native Android application (Kotlin, Jetpack Compose, Room) |
+| `summa-ios` | Native iOS application (Swift, SwiftUI, SwiftData) |
 | `summa` | Open-source synchronization backend (Go, PostgreSQL, Docker) |
 | `summa-website` | Official website and documentation portal |
 | `summa-cloud` | Private infrastructure and operational tooling for Summa Cloud |
@@ -654,8 +684,6 @@ The repository structure should support future additions such as:
 - Public API SDKs
 
 without requiring major restructuring.
-
-Flutter's built-in desktop support simplifies future expansion to Windows, macOS and Linux.
 
 ---
 

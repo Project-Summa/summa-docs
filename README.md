@@ -48,7 +48,8 @@ Summa is in **Phase 0 — Foundation**. The team is establishing architecture, d
 | Repository | Description |
 |---|---|
 | [`summa-docs`](https://github.com/Project-Summa/summa-docs) | Documentation, architecture and project governance |
-| [`summa-mobile`](https://github.com/Project-Summa/summa-mobile) | Cross-platform mobile client (Flutter) |
+| [`summa-android`](https://github.com/Project-Summa/summa-android) | Native Android client |
+| [`summa-ios`](https://github.com/Project-Summa/summa-ios) | Native iOS client |
 | [`summa`](https://github.com/Project-Summa/summa) | Open-source synchronization backend |
 | [`summa-website`](https://github.com/Project-Summa/summa-website) | Official website and documentation portal |
 
@@ -105,7 +106,7 @@ summa/
 | Phase | Name | Focus |
 |---|---|---|
 | 0 | Foundation | Documentation, architecture and development standards |
-| 1 | Local First MVP | Mobile application with local-only financial tracking |
+| 1 | Local First MVP | Android application with local-only financial tracking |
 | 2 | Smart Features | OCR, bank import, smart categorization |
 | 3 | Self-Hosted Platform | Synchronization server, multi-device support |
 | 4 | Summa Cloud | Managed cloud hosting, billing and premium features |

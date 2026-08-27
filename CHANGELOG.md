@@ -8,11 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-### Changed
-
-- Migrated mobile strategy from native Kotlin/Swift (summa-android + summa-ios) to Flutter (summa-mobile) — single cross-platform codebase replacing two separate native repositories
-- Updated all documentation to reflect Flutter/Dart stack: tech stack, mobile architecture, project structure, coding guidelines, security model, git workflow, milestones, glossary
-
 ### Added
 
 - Project overview documentation

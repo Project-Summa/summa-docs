@@ -56,7 +56,7 @@ The workflow should:
 - Keep pull requests focused
 - Maintain readable history
 - Prevent accidental secret exposure
-- Support mobile and backend development
+- Support Android, iOS and backend development
 - Work well with AI coding tools
 - Avoid unnecessary process complexity
 
@@ -68,7 +68,8 @@ Summa uses a multi-repo strategy.
 
 ```text
 summa-docs         — central documentation and governance
-summa-mobile       — cross-platform mobile application (Flutter)
+summa-android      — native Android application
+summa-ios          — native iOS application
 summa              — synchronization backend
 summa-website      — official website
 .github            — organization-wide GitHub configuration
@@ -134,10 +135,10 @@ type/short-description
 Examples:
 
 ```text
-feature/mobile-dashboard
+feature/android-dashboard
 feature/transaction-create-flow
 fix/category-delete-crash
-refactor/mobile-data-layer
+refactor/android-data-layer
 docs/security-model
 test/sync-conflict-cases
 chore/update-kotlin
@@ -293,12 +294,12 @@ type(scope): description
 Examples:
 
 ```text
-feat(mobile): add transaction creation screen
+feat(android): add transaction creation screen
 fix(backend): reject expired refresh tokens
 docs(security): document local backup encryption
 refactor(database): extract transaction mapper
-test(mobile): add dashboard view model tests
-chore(deps): update flutter dependencies
+test(android): add dashboard view model tests
+chore(deps): update compose dependencies
 ```
 
 ---
@@ -327,7 +328,8 @@ security  Security improvement
 Recommended scopes:
 
 ```text
-mobile
+android
+ios
 backend
 api
 database
@@ -363,7 +365,7 @@ The subject should:
 Good:
 
 ```text
-fix(mobile): preserve transaction note after validation error
+fix(android): preserve transaction note after validation error
 ```
 
 Avoid:
@@ -605,14 +607,22 @@ Required rules:
 
 Depending on changed paths:
 
-### Mobile
+### Android
 
 ```text
 Build
 Unit tests
-Widget tests where applicable
-dart format
-dart analyze
+Compose tests where applicable
+ktlint
+Detekt
+```
+
+### iOS
+
+```text
+Build
+Unit tests
+SwiftLint
 ```
 
 ### Backend
@@ -640,7 +650,8 @@ Mermaid syntax validation where available
 Recommended ownership examples:
 
 ```text
-/mobile/               @summa/mobile
+/android/              @summa/android
+/ios/                  @summa/ios
 /backend/              @summa/backend
 /docs/                 @summa/maintainers
 /.github/workflows/    @summa/maintainers

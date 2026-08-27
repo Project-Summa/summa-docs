@@ -164,7 +164,7 @@ docs/phase-0/04_BACKEND_ARCHITECTURE.md
 
 Before approval, answer:
 
-- Can the mobile application work without a backend?
+- Can the Android application work without a backend?
 - Can synchronization be added without replacing local repositories?
 - Is business logic separate from UI?
 - Is backend deployment simple enough for self-hosting?
@@ -266,7 +266,7 @@ The initial OpenAPI file should define:
 
 ## Exit Criteria
 
-Milestone 0.3 is complete when mobile and backend developers can independently implement compatible data structures from the documentation.
+Milestone 0.3 is complete when Android, iOS and backend developers can independently implement compatible data structures from the documentation.
 
 ---
 
@@ -402,8 +402,10 @@ Light and dark examples
 - [ ] Review requirements are defined
 - [ ] Merge strategy is defined
 - [ ] Release strategy is defined
-- [ ] Dart conventions are defined
-- [ ] Flutter widget conventions are defined
+- [ ] Kotlin conventions are defined
+- [ ] Compose conventions are defined
+- [ ] Swift conventions are defined
+- [ ] SwiftUI conventions are defined
 - [ ] Go conventions are defined
 - [ ] Logging rules are defined
 - [ ] Error handling rules are defined
@@ -449,7 +451,8 @@ summa/
 Platform repositories:
 
 ```text
-summa-mobile/
+summa-android/
+summa-ios/
 summa/ (backend)
 ```
 
@@ -471,7 +474,8 @@ Each platform repository maintains its own CI workflows, issue tracking and rele
 - [ ] `.editorconfig` exists
 - [ ] `.gitattributes` exists
 - [ ] Documentation folders exist
-- [ ] Mobile folder exists
+- [ ] Android folder exists
+- [ ] iOS folder exists
 - [ ] Backend folder exists
 - [ ] Branch protection is enabled
 - [ ] Issue templates exist
@@ -487,10 +491,10 @@ Create at minimum:
 
 ```text
 .github/workflows/docs.yml
-.github/workflows/mobile.yml
+.github/workflows/android.yml
 ```
 
-The backend workflow may begin as a placeholder until the skeleton project exists.
+The iOS and backend workflows may begin as placeholders until their skeleton projects exist.
 
 ---
 
@@ -505,15 +509,15 @@ Should validate:
 
 ---
 
-## Mobile CI
+## Android CI
 
-After Flutter skeleton exists:
+After Android skeleton exists:
 
 - Build debug application
 - Run unit tests
-- Run widget tests
-- Run dart format
-- Run dart analyze
+- Run ktlint
+- Run Detekt
+- Run Android Lint
 
 ---
 
@@ -535,12 +539,12 @@ Confirm that Phase 1 can begin with clear tasks and no unresolved foundational b
 
 Before starting Phase 1, finalize:
 
-- Flutter application ID
-- Minimum SDK versions (Android and iOS)
-- Flutter module strategy
-- drift database version 1 scope
-- State management approach (Riverpod vs BLoC)
-- Navigation approach (GoRouter)
+- Android application ID
+- Minimum Android SDK
+- Android module strategy
+- Room database version 1 scope
+- Dependency injection framework
+- Navigation approach
 - Design token implementation approach
 - Initial supported currency behavior
 - Initial supported languages
@@ -551,25 +555,41 @@ Before starting Phase 1, finalize:
 
 ---
 
-## Mobile Skeleton Requirements
+## Android Skeleton Requirements
 
-The Flutter project should contain:
+The Android project should contain:
 
 ```text
-main.dart
-App widget
-Theme configuration
-Navigation skeleton (GoRouter)
-Riverpod provider setup
-Database module placeholder (drift)
+Application class
+MainActivity
+Compose theme
+Navigation skeleton
+Dependency injection setup
+Database module placeholder
 Core domain module or package
 Feature package structure
 Unit test setup
-Linting setup (analysis_options.yaml)
+Linting setup
 CI build
 ```
 
 No full production feature is required during Phase 0.
+
+---
+
+## Optional iOS Skeleton
+
+The iOS project may contain:
+
+```text
+Application entry point
+Theme tokens
+Navigation placeholder
+Persistence placeholder
+Test target
+```
+
+Android remains the first implementation priority.
 
 ---
 
@@ -642,7 +662,7 @@ The following decisions should be resolved or explicitly deferred.
 | Decision | Status | Deadline |
 |---|---|---|
 | Final open-source license | Resolved — AGPL-3.0 | — |
-| Flutter application ID | Open | Before Flutter project creation |
+| Android application ID | Open | Before Android project creation |
 | Local database encryption release target | Open | Before public beta |
 | Exact profile and workspace relationship | Resolved | Documented in glossary and architecture |
 | Transaction split entity in MVP | Review | Before transaction schema |
@@ -714,7 +734,7 @@ Phase 0 is complete only when:
 - [ ] Git workflow is active
 - [ ] Initial CI is active
 - [ ] Figma foundations exist
-- [ ] Flutter skeleton builds successfully
+- [ ] Android skeleton builds successfully
 - [ ] Phase 1 epics exist
 - [ ] First Phase 1 milestone is approved
 - [ ] No unresolved issue blocks the transaction data model
@@ -732,7 +752,7 @@ Local First MVP
 Recommended implementation order:
 
 ```text
-1. Flutter project foundation
+1. Android project foundation
 2. Design token implementation
 3. Local database
 4. Profiles and workspaces
@@ -750,12 +770,13 @@ Recommended implementation order:
 
 ## Initial Phase 1 Backlog
 
-### Epic 1 — Mobile Foundation
+### Epic 1 — Android Foundation
 
-- Create Flutter project
-- Configure Riverpod
-- Configure drift
-- Configure GoRouter
+- Create Android project
+- Configure Compose
+- Configure Hilt
+- Configure Room
+- Configure navigation
 - Configure linting
 - Configure tests
 - Configure CI
