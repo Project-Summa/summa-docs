@@ -298,7 +298,7 @@ The base directory on the server filesystem where user-uploaded files are stored
 
 ### Phase 1 — Local First MVP
 
-The first implementation phase. Delivers a fully functional local-only Android application with profiles, categories, transactions, dashboard, statistics, export and settings. No backend or synchronization.
+The first implementation phase. Delivers a fully functional local-only mobile application (Flutter) with profiles, categories, transactions, dashboard, statistics, export and settings. No backend or synchronization.
 
 ---
 

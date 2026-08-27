@@ -62,10 +62,10 @@ If the answer to multiple questions is "No", reconsider the choice.
 
 ```
 
-Android (Kotlin)
+Mobile (Flutter / Dart)
 │
-├── UI (Jetpack Compose)
-├── ViewModels
+├── UI (Widgets)
+├── State Management
 ├── Domain
 ├── Repository
 ├── Local Database
@@ -83,94 +83,66 @@ PostgreSQL
 
 # Mobile Stack
 
-## Android
+## Flutter
 
 Language
 
-- Kotlin
+- Dart
 
 UI
 
-- Jetpack Compose
+- Flutter Widgets
 - Material 3
 
 Architecture
 
-- MVVM
+- MVVM (or BLoC / Riverpod, to be finalized)
 
 State Management
 
-- StateFlow
-- Flow
-- Coroutines
+- Riverpod (preferred)
+- Alternatively BLoC
 
 Navigation
 
-- Navigation Compose
+- GoRouter
 
 Dependency Injection
 
-- Hilt
+- Riverpod (built-in)
+- Alternatively get_it
 
 Database
 
-- Room
+- drift (type-safe SQLite for Dart)
 
 Serialization
 
-- kotlinx.serialization
+- json_serializable
+- freezed
 
 Networking (Future)
 
-- Ktor Client
+- dio
 
 Image Loading
 
-- Coil
+- cached_network_image
 
 Preferences
 
-- DataStore
+- shared_preferences
+- flutter_secure_storage (for sensitive data)
 
 Logging
 
-- Timber
+- logger
+- talker
 
 Minimum SDK
 
-Android 8.0 (API 26)
-
----
-
-## iOS
-
-Language
-
-- Swift
-
-UI
-
-- SwiftUI
-
-Architecture
-
-- MVVM
-
-Persistence
-
-- SwiftData (or Core Data if required)
-
-Networking
-
-- URLSession
-
-Dependency Management
-
-- Swift Package Manager
-
-Minimum Version
-
-iOS 17 (subject to change)
+- Android 8.0 (API 26)
+- iOS 16.0
 
 ---
 
@@ -234,7 +206,7 @@ SQLite
 
 Accessed using:
 
-Room
+drift
 
 ---
 
@@ -322,13 +294,12 @@ Encrypted (future)
 
 Secure Storage
 
-Android
+flutter_secure_storage
 
-EncryptedSharedPreferences
+Uses platform-native secure storage under the hood:
 
-iOS
-
-Keychain
+- Android Keystore
+- iOS Keychain
 
 Transport
 
@@ -350,7 +321,7 @@ Phase 2
 
 Possible providers
 
-Google ML Kit
+Google ML Kit (via google_mlkit_text_recognition)
 
 Advantages
 
@@ -368,7 +339,7 @@ Optional AI-powered OCR improvements.
 
 Library
 
-ZXing
+mobile_scanner
 
 Future
 
@@ -394,9 +365,7 @@ Custom parser per supported bank.
 
 IDE
 
-Android Studio
-
-Xcode
+Android Studio (for emulator and platform tooling)
 
 Code Editor
 
@@ -432,23 +401,25 @@ Markdown
 
 Unit Tests
 
-JUnit
+flutter_test
 
 Mocking
 
-MockK
+mockito
 
 UI Tests
 
-Compose Testing
+Flutter Widget Tests
+
+Integration Tests
+
+integration_test
 
 Backend
 
 Go testing
 
 Future
-
-Integration tests
 
 End-to-end tests
 
@@ -460,11 +431,12 @@ Performance benchmarks
 
 Formatting
 
-ktlint
+dart format
 
 Static Analysis
 
-Detekt
+dart analyze
+custom analysis_options.yaml
 
 Dependency Updates
 
@@ -530,7 +502,7 @@ Potential future additions
 
 Desktop
 
-Compose Multiplatform
+Flutter Desktop (built-in cross-platform support)
 
 Browser Extension
 
@@ -554,7 +526,7 @@ Every significant technology decision should be documented.
 
 Examples
 
-- Why Kotlin?
+- Why Flutter?
 - Why Go?
 - Why PostgreSQL?
 - Why REST?

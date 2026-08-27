@@ -20,10 +20,8 @@
 - [Nullability](#nullability)
 - [Comments and Documentation](#comments-and-documentation)
 - [Testing](#testing)
-- [Android Guidelines](#android-guidelines)
-- [Jetpack Compose Guidelines](#jetpack-compose-guidelines)
-- [iOS Guidelines](#ios-guidelines)
-- [SwiftUI Guidelines](#swiftui-guidelines)
+- [Flutter Guidelines](#flutter-guidelines)
+- [Flutter Widget Guidelines](#flutter-widget-guidelines)
 - [Backend Guidelines](#backend-guidelines)
 - [Database Guidelines](#database-guidelines)
 - [API Guidelines](#api-guidelines)
@@ -42,8 +40,7 @@
 
 This document defines coding standards across:
 
-- Android
-- iOS
+- Mobile (Flutter)
 - Backend
 - Shared documentation
 - Scripts
@@ -131,9 +128,8 @@ Avoid:
 ```text
 UI → DAO
 UI → HTTP client
-ViewModel → Room DAO
-Domain → Android framework
-Domain → SwiftUI
+ViewModel → drift DAO
+Domain → Flutter framework
 Domain → PostgreSQL driver
 Business logic → Logging implementation
 ```
@@ -144,8 +140,7 @@ Business logic → Logging implementation
 
 Domain code should not depend on:
 
-- Android SDK
-- iOS frameworks
+- Flutter framework
 - HTTP
 - Database drivers
 - UI components
@@ -281,14 +276,14 @@ When a function requires many related parameters, consider a value object.
 
 Example:
 
-```kotlin
-data class CreateTransactionCommand(
-    val profileId: ProfileId,
-    val categoryId: CategoryId,
-    val amount: Money,
-    val occurredAt: Instant,
-    val note: String?
-)
+```dart
+class CreateTransactionCommand {
+  final ProfileId profileId;
+  final CategoryId categoryId;
+  final Money amount;
+  final Instant occurredAt;
+  final String? note;
+}
 ```
 
 Do not use a parameter object only to hide poor design.
@@ -301,8 +296,7 @@ Prefer immutable values and state.
 
 Examples:
 
-- Kotlin `val`
-- Swift `let`
+- Dart `final`
 - Immutable UI state
 - Copy-based state updates
 - Domain models without uncontrolled mutation
@@ -358,10 +352,11 @@ Never silently swallow exceptions.
 
 Avoid:
 
-```kotlin
+```dart
 try {
-    operation()
-} catch (e: Exception) {
+  operation();
+} catch (e) {
+  // silently swallowed
 }
 ```
 
@@ -462,11 +457,11 @@ Prefer a dedicated type.
 
 Example:
 
-```kotlin
-data class Money(
-    val amountMinor: Long,
-    val currency: CurrencyCode
-)
+```dart
+class Money {
+  final int amountMinor;
+  final CurrencyCode currency;
+}
 ```
 
 ---
@@ -580,16 +575,16 @@ Comments should not repeat code.
 
 Avoid:
 
-```kotlin
+```dart
 // Increase count by one
 count++
 ```
 
 Useful:
 
-```kotlin
+```dart
 // Preserve stable allocation order so split results remain identical
-// across Android, iOS and the backend.
+// across mobile and the backend.
 ```
 
 ---
@@ -705,85 +700,84 @@ Never use:
 
 ---
 
-## Android Guidelines
+## Flutter Guidelines
 
-Android code uses:
+Flutter code uses:
 
-- Kotlin
-- Jetpack Compose
-- Coroutines
-- Flow
-- Room
-- Hilt
-- DataStore
+- Dart
+- Flutter Widgets
+- Riverpod
+- drift
+- GoRouter
 
-Follow official Kotlin style unless this document defines a stricter project rule.
+Follow official Dart style unless this document defines a stricter project rule.
 
 ---
 
-## Kotlin Naming
+## Dart Naming
 
 ```text
 Class and interface    PascalCase
 Function and property  camelCase
-Constant               UPPER_SNAKE_CASE
-Package                lowercase
+Constant               lowerCamelCase or UPPER_SNAKE_CASE
+Package                snake_case
+File                   snake_case.dart
 ```
 
 ---
 
-## Kotlin Coroutines
+## Dart Async
 
-Use structured concurrency.
+Use async/await for asynchronous operations.
 
 Avoid:
 
 ```text
-GlobalScope
-unmanaged background jobs
-blocking main thread
+unmanaged Futures
+blocking the main isolate
+ignoring Futures
 ```
 
-View models should launch work through their owned scope.
+View models should manage their own async scope.
 
-Repositories should expose suspend functions or Flow as appropriate.
-
----
-
-## Kotlin Flow
-
-Use Flow for observable streams.
-
-Avoid collecting the same database stream repeatedly without reason.
-
-Use `StateFlow` for UI state.
-
-UI should collect state in a lifecycle-aware manner.
+Repositories should expose Future or Stream as appropriate.
 
 ---
 
-## Jetpack Compose Guidelines
+## Dart Streams
 
-Composable functions should:
+Use Stream for observable data.
+
+Avoid listening to the same database stream repeatedly without reason.
+
+Use StateNotifier or equivalent for UI state.
+
+UI should react to state changes through Riverpod providers.
+
+---
+
+## Flutter Widget Guidelines
+
+Widget classes should:
 
 - Be stateless where practical
 - Receive state and event callbacks
 - Avoid direct repository access
-- Avoid starting uncontrolled work during composition
+- Avoid starting uncontrolled work during build
 - Use stable keys in lazy collections
 - Use design-system components
 - Support previews where useful
 
 ---
 
-## Compose Screen Pattern
+## Flutter Screen Pattern
 
 Preferred:
 
 ```text
 Route
     ↓
-ViewModel
+ViewModel / StateNotifier
     ↓
 Screen
     ↓
@@ -794,25 +788,25 @@ Reusable components
 
 Example:
 
-```kotlin
-@Composable
-fun DashboardRoute(
-    viewModel: DashboardViewModel
-) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+```dart
+class DashboardScreen extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardViewModelProvider);
 
-    DashboardScreen(
-        state = state,
-        onEvent = viewModel::onEvent
-    )
+    return DashboardContent(
+      state: state,
+      onEvent: ref.read(dashboardViewModelProvider.notifier).onEvent,
+    );
+  }
 }
 ```
 
 ---
 
-## Compose State
+## Flutter State
 
-Avoid passing the full ViewModel deep into the component tree.
+Avoid passing the full ViewModel deep into the widget tree.
 
 Pass:
 
@@ -822,22 +816,21 @@ Pass:
 
 ---
 
-## Compose Side Effects
+## Flutter Side Effects
 
-Use appropriate APIs:
+Use appropriate patterns:
 
 ```text
-LaunchedEffect
-DisposableEffect
-SideEffect
-rememberUpdatedState
+ref.listen
+WidgetsBindingObserver
+Riverpod lifecycle
 ```
 
-Side effects must not run accidentally on every recomposition.
+Side effects must not run accidentally on every rebuild.
 
 ---
 
-## Compose Preview
+## Flutter Preview
 
 Reusable visual components should include previews for:
 
@@ -848,50 +841,6 @@ Reusable visual components should include previews for:
 - Large font where practical
 
 Preview data must remain fictional.
-
----
-
-## iOS Guidelines
-
-iOS uses:
-
-- Swift
-- SwiftUI
-- Swift Concurrency
-- SwiftData or approved persistence layer
-- Swift Package Manager
-
-Follow standard Swift naming conventions.
-
----
-
-## Swift Concurrency
-
-Prefer:
-
-```text
-async/await
-Task
-actors where shared mutable state requires isolation
-```
-
-Avoid blocking the main actor.
-
-UI state changes must occur on the appropriate actor.
-
----
-
-## SwiftUI Guidelines
-
-Views should:
-
-- Remain small and composable
-- Receive state rather than fetch data directly
-- Use observable view models
-- Avoid business logic in `body`
-- Use design tokens
-- Support previews
-- Respect Dynamic Type
 
 ---
 
@@ -1078,19 +1027,12 @@ Automated update pull requests must not be merged blindly.
 
 ## Formatting and Linting
 
-### Android
+### Mobile
 
 ```text
-ktlint
-Detekt
-Android Lint
-```
-
-### iOS
-
-```text
-SwiftFormat or project-approved formatter
-SwiftLint
+dart format
+dart analyze
+custom analysis_options.yaml
 ```
 
 ### Backend
@@ -1182,8 +1124,7 @@ Coding guidelines are ready when:
 - Money rules are defined
 - Date and time rules are defined
 - Error and logging rules are defined
-- Android rules are defined
-- iOS rules are defined
+- Flutter/Dart rules are defined
 - Backend rules are defined
 - Database rules are defined
 - Test expectations are defined
