@@ -260,7 +260,7 @@ git pull origin develop
 Create the branch:
 
 ```bash
-git checkout -b feature/android-dashboard
+git checkout -b feature/mobile-dashboard
 ```
 
 ---
