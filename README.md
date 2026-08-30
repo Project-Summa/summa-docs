@@ -39,7 +39,7 @@
 
 ## Current Status
 
-Summa is in **Phase 0 — Foundation**. The team is establishing architecture, documentation and development standards before feature implementation begins.
+Summa is in **Phase 0 — Foundation**. Architecture documentation is complete and Phase 1 implementation documentation is ready. Figma design work is still in progress.
 
 ---
 
@@ -66,18 +66,29 @@ docs/
 ├── 03_TECH_STACK.md
 ├── 04_PROJECT_STRUCTURE.md
 ├── 05_GLOSSARY_AND_DOMAIN_LANGUAGE.md
-└── phase-0/
+├── phase-0/
+│   ├── 00_README.md
+│   ├── 01_ARCHITECTURE.md
+│   ├── 02_DATABASE.md
+│   ├── 03_MOBILE_ARCHITECTURE.md
+│   ├── 04_BACKEND_ARCHITECTURE.md
+│   ├── 05_API_DESIGN.md
+│   ├── 06_SECURITY_MODEL.md
+│   ├── 07_DESIGN_SYSTEM.md
+│   ├── 08_GIT_WORKFLOW.md
+│   ├── 09_CODING_GUIDELINES.md
+│   └── 10_MILESTONES.md
+└── phase-1/
     ├── 00_README.md
-    ├── 01_ARCHITECTURE.md
-    ├── 02_DATABASE.md
-    ├── 03_MOBILE_ARCHITECTURE.md
-    ├── 04_BACKEND_ARCHITECTURE.md
-    ├── 05_API_DESIGN.md
-    ├── 06_SECURITY_MODEL.md
-    ├── 07_DESIGN_SYSTEM.md
-    ├── 08_GIT_WORKFLOW.md
-    ├── 09_CODING_GUIDELINES.md
-    └── 10_MILESTONES.md
+    ├── 01_IMPLEMENTATION_PLAN.md
+    ├── 02_MOBILE_IMPLEMENTATION.md
+    ├── 03_DATABASE_IMPLEMENTATION.md
+    ├── 04_FEATURE_SPECIFICATIONS.md
+    ├── 05_SECURITY_IMPLEMENTATION.md
+    ├── 06_DESIGN_IMPLEMENTATION.md
+    ├── 07_TESTING_STRATEGY.md
+    ├── 08_RELEASE_PLAN.md
+    └── 09_MILESTONES.md
 ```
 
 ---
@@ -85,16 +96,16 @@ docs/
 ## Repository Structure
 
 ```text
-summa/
+summa-docs/
 ├── README.md
 ├── CONTRIBUTING.md
 ├── SECURITY.md
 ├── LICENSE
 ├── CHANGELOG.md
 ├── docs/              # Project documentation
-├── design/            # Design files and tokens
-├── branding/          # Logos, icons and brand assets
-├── scripts/           # Utility scripts
+├── branding/          # Brand assets (planned)
+├── design/            # Design files and tokens (planned)
+├── scripts/           # Utility scripts (planned)
 └── website/           # Project website (planned)
 ```
 
