@@ -499,7 +499,7 @@ Mitigation: Write tests alongside implementation, not after. Use the testing str
 ## Branch Strategy
 
 ```text
-main          → stable releases
+master        → stable releases
 develop       → integration branch
 feature/*     → individual features
 fix/*         → bug fixes

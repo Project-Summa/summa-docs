@@ -45,35 +45,60 @@ Reasons:
 - Independent contributor access control
 - Reduced clone size for single-platform contributors
 
-Shared concerns (documentation, branding, GitHub configuration) are maintained in the central `summa` repository.
+Shared concerns (documentation, branding, GitHub configuration) are maintained across dedicated repositories.
 
 ---
 
 # Repository Structure
 
+Each repository is independent and self-contained.
+
 ```
 
-summa/
-
-├── .github/
-│
-├── mobile/
-│
-├── backend/
-│
+summa-docs/              # Central documentation and project governance
 ├── docs/
-│
-├── design/
-│
 ├── branding/
-│
+├── design/
 ├── scripts/
-│
 ├── website/
-│
-├── LICENSE
 ├── README.md
-└── CONTRIBUTING.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── LICENSE
+└── CHANGELOG.md
+
+summa-mobile/            # Cross-platform mobile application
+├── lib/
+├── test/
+├── integration_test/
+├── assets/
+└── pubspec.yaml
+
+summa/                   # Self-hosted synchronization backend
+├── cmd/
+├── internal/
+├── pkg/
+├── api/
+├── config/
+├── database/
+├── docker/
+├── migrations/
+├── tests/
+├── README.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+└── LICENSE
+
+summa-website/           # Official website and documentation portal
+
+.github/                 # Organization-wide GitHub configuration
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── CODE_OF_CONDUCT.md
+├── LICENSE
+├── ISSUE_TEMPLATE/
+├── pull_request_template.md
+└── profile/
 
 ```
 
@@ -83,16 +108,19 @@ summa/
 
 ## .github/
 
+Organization-wide GitHub configuration.
+
 Contains:
 
 - GitHub Actions
 - Issue templates
 - Pull Request templates
 - Discussion templates
+- Community health files (CONTRIBUTING, SECURITY, CODE_OF_CONDUCT, LICENSE)
 
 ---
 
-## mobile/
+## summa-mobile/
 
 Cross-platform mobile application built with Flutter.
 
@@ -111,9 +139,9 @@ Contains:
 
 ---
 
-## backend/
+## summa/
 
-Self-host synchronization server.
+Self-hosted synchronization backend.
 
 Contains:
 
@@ -125,7 +153,7 @@ Contains:
 
 ---
 
-## docs/
+## summa-docs/docs/
 
 Project documentation.
 
@@ -140,7 +168,7 @@ Includes:
 
 ---
 
-## design/
+## summa-docs/design/
 
 Design assets.
 
@@ -153,7 +181,7 @@ Examples:
 
 ---
 
-## branding/
+## summa-docs/branding/
 
 Brand identity.
 
@@ -166,7 +194,7 @@ Includes:
 
 ---
 
-## scripts/
+## summa-docs/scripts/
 
 Development utilities.
 
@@ -178,7 +206,7 @@ Examples:
 
 ---
 
-## website/
+## summa-website/
 
 Landing page.
 
@@ -188,9 +216,11 @@ Documentation website (future).
 
 # Mobile Structure
 
+The mobile application lives in the `summa-mobile` repository.
+
 ```
 
-mobile/
+summa-mobile/
 
 lib/
 
@@ -318,9 +348,11 @@ Examples:
 
 # Backend Structure
 
+The backend lives in the `summa` repository.
+
 ```
 
-backend/
+summa/
 
 cmd/
 
@@ -346,9 +378,11 @@ tests/
 
 # Documentation Structure
 
+Documentation lives in the `summa-docs` repository.
+
 ```
 
-docs/
+summa-docs/docs/
 
 00_PROJECT_OVERVIEW.md
 
@@ -494,7 +528,7 @@ Main branches
 
 ```
 
-main
+master
 
 develop
 
@@ -639,7 +673,7 @@ Examples
 
 ↓
 
-8. Release to main
+8. Release to master
 
 ---
 

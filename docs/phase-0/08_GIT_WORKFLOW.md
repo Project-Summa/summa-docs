@@ -81,16 +81,16 @@ All repositories share the same organization-level issue tracker and pull reques
 
 ## Primary Branches
 
-### `main`
+### `master`
 
-The `main` branch contains:
+The `master` branch contains:
 
 - Stable code
 - Released code
 - Approved documentation
 - Production-ready configuration
 
-Direct pushes to `main` are forbidden.
+Direct pushes to `master` are forbidden.
 
 ---
 
@@ -584,7 +584,7 @@ A merge commit may be used for:
 Protect:
 
 ```text
-main
+master
 develop
 ```
 
@@ -662,7 +662,7 @@ release/x.y.z
    ↓
 Release testing and fixes
    ↓
-main
+master
    ↓
 Git tag
    ↓
@@ -697,16 +697,16 @@ No new features should be added.
 
 ## Hotfix Workflow
 
-Hotfixes begin from `main`.
+Hotfixes begin from `master`.
 
 ```text
-main
+master
   ↓
 hotfix/x.y.z-description
   ↓
 Review and test
   ↓
-main
+master
   ↓
 Tag
   ↓
@@ -770,7 +770,7 @@ v1.0.0
 v1.1.0-beta.1
 ```
 
-Tags should be created only from `main`.
+Tags should be created only from `master`.
 
 ---
 
